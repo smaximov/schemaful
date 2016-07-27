@@ -17,7 +17,7 @@ module Schemaful
       # Subclasses should implement {#on_validate} hook to provide custom
       # validation according to their type.
       class Any < Base
-        # @return [Array<#call, Symbol>] array of validation functions.
+        # @return [Array<#to_proc>] array of validation functions.
         attr_reader :validators
 
         # @overload type
@@ -66,7 +66,7 @@ module Schemaful
         #   any.validate(1) #=> raise Schemaful::ValidationError
         #   any.validate(2) #=> nil
         #
-        # @param validator [#call, Symbol, Array<#call, Symbol>]
+        # @param validator [#to_proc, Array<#to_proc>]
         #   either a validation function or an array of validation functions.
         def initialize(validator: [])
           super()
@@ -75,7 +75,7 @@ module Schemaful
 
         # Add a validation function.
         #
-        # @param validator [#call, Symbol]
+        # @param validator [#to_proc]
         def validator(validator)
           @validators << validator
         end
