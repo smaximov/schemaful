@@ -21,10 +21,10 @@ module Schemaful
         attr_reader :validators
 
         # @overload type
-        #   @return [Object] the type associated with the class.
+        #   @return [Class] the type associated with the class.
         # @overload type(value)
         #   Set the type associated with the class.
-        #   @param value [Object] a type to be associated with the class.
+        #   @param value [Class] a type to be associated with the class.
         def self.type(value = nil)
           if value.nil?
             @type
