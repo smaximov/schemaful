@@ -1,5 +1,22 @@
 sudo: false
+cache: bundler
 language: ruby
 rvm:
+  - 2.0.0
+  - 2.1
+  - 2.2
   - 2.3.0
-before_install: gem install bundler -v 1.12.5
+  - ruby-head
+  - rbx-head
+  - jruby-9.0
+matrix:
+  allow_failures:
+    - rvm: ruby-head
+    - rvm: jruby-9.0
+    - rvm: rbx-head
+before_install: gem update --remote bundler
+install:
+  - bundle install --retry=3
+script:
+  - rake rspec
+  - bundle exec rubocop
