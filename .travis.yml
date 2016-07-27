@@ -18,6 +18,8 @@ matrix:
 before_install: gem update --remote bundler
 install:
   - bundle install --retry=3
+  - bundle exec yard config load_plugins true
 script:
   - bundle exec rspec
+  - bundle exec yard doctest
   - bundle exec rubocop
