@@ -62,7 +62,7 @@ module Schemaful
           end
 
           context '#on_validate with a validator' do
-            before { subject.validator(:positive?) }
+            before { subject.validator(:even?) }
 
             context 'valid value' do
               it { expect { subject.validate(42) }.not_to raise_error }
@@ -70,7 +70,7 @@ module Schemaful
 
             context 'invalid value' do
               it do
-                expect { subject.validate(0) }
+                expect { subject.validate(1) }
                   .to raise_error(ValidationError)
               end
             end
