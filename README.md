@@ -1,6 +1,7 @@
 # Schemaful
 
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](http://opensource.org/licenses/MIT)
+[![Inline docs](http://inch-ci.org/github/smaximov/schemaful.svg?branch=master)](http://inch-ci.org/github/smaximov/schemaful)
 
 TODO: Delete this and the text above, and describe your gem
 
