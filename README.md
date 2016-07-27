@@ -1,5 +1,7 @@
 # Schemaful
 
+[![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](http://opensource.org/licenses/MIT)
+
 TODO: Delete this and the text above, and describe your gem
 
 ## Installation
