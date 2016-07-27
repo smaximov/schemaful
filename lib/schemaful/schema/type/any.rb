@@ -46,7 +46,7 @@ module Schemaful
         #   any.validate('any value, literally!') #=> nil
         #
         # @example Specify a validator using the keyword argument
-        #   any = Any.new(validators: [->(v) { v.is_a?(Integer) }])
+        #   any = Any.new(validator: ->(v) { v.is_a?(Integer) })
         #   any.validate(2) #=> nil
         #   any.validate('invalid') #=> raise Schemaful::ValidationError
         #
@@ -66,11 +66,11 @@ module Schemaful
         #   any.validate(1) #=> raise Schemaful::ValidationError
         #   any.validate(2) #=> nil
         #
-        # @param validators [Array<#call, Symbol>]
-        #   array of validation functions.
-        def initialize(validators: [])
+        # @param validator [#call, Symbol, Array<#call, Symbol>]
+        #   either a validation function or an array of validation functions.
+        def initialize(validator: [])
           super()
-          @validators = validators
+          @validators = Array(validator)
         end
 
         # Add a validation function.

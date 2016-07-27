@@ -8,14 +8,36 @@ module Schemaful
       describe Any do
         describe '.type' do
           subject { Any.type }
-          it { is_expected.to eq(Object) }
+          it { is_expected.to be(Object) }
+        end
+
+        describe '#initialize' do
+          subject { Any.new(validator: validator) }
+
+          context 'without validators' do
+            let(:validator) { [] }
+
+            it { is_expected.to have(0).validators }
+          end
+
+          context 'single validator' do
+            let(:validator) { :even? }
+
+            it { is_expected.to have(1).validators }
+          end
+
+          context 'array of validators' do
+            let(:validator) { [->(v) { v.is_a?(Integer) }, :even?]}
+
+            it { is_expected.to have(2).validators }
+          end
         end
 
         describe '#validate' do
-          subject { Any.new(validators: validators) }
+          subject { Any.new(validator: validator) }
 
           context 'any value' do
-            let(:validators) { [] }
+            let(:validator) { [] }
 
             it 'should be valid' do
               expect { subject.validate('42') }.not_to raise_error
@@ -24,7 +46,7 @@ module Schemaful
           end
 
           context 'with a validator' do
-            let(:validators) { [->(v) { v.is_a?(String) }] }
+            let(:validator) { ->(v) { v.is_a?(String) } }
 
             context 'valid value' do
               it { expect { subject.validate('42') }.not_to raise_error }
