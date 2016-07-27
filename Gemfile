@@ -6,5 +6,6 @@ source 'https://rubygems.org'
 gemspec
 
 group :test do
-  gem 'yard-doctest'
+  gem 'codeclimate-test-reporter', require: false
+  gem 'yard-doctest', require: false
 end
