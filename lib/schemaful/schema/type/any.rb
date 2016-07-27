@@ -9,7 +9,7 @@ module Schemaful
       # - (*optional*) parsing a string representation of a value of
       #   the associated type;
       # - validating that value;
-      # - (*optional*) converting a value of the associated type to {String}.
+      # - (*optional*) converting a value of the associated type to String.
       #
       # This class represents the "wildcard" type and accepts every value as
       # valid.
@@ -36,6 +36,36 @@ module Schemaful
 
         type Object
 
+        # A new instance of Any.
+        #
+        # To restrict accepted values, you should provide additional validators
+        # using the keyword parameter `validator:` or {#validator}.
+        #
+        # @example Basic usage
+        #   any = Any.new
+        #   any.validate('any value, literally!') #=> nil
+        #
+        # @example Specify a validator using the keyword argument
+        #   any = Any.new(validators: [->(v) { v.is_a?(Integer) }])
+        #   any.validate(2) #=> nil
+        #   any.validate('invalid') #=> raise Schemaful::ValidationError
+        #
+        # @example Specify a validator using {#validator}
+        #   any = Any.new
+        #
+        #   # Any accepts any value by default:
+        #   any.validate('string') #=> nil
+        #
+        #   # check if a value is Integer:
+        #   any.validator(->(v) { v.is_a?(Integer) })
+        #   any.validate('string') #=> raise Schemaful::ValidationError
+        #   any.validate(1) #=> nil
+        #
+        #   # check if a value is even:
+        #   any.validator(:even?)
+        #   any.validate(1) #=> raise Schemaful::ValidationError
+        #   any.validate(2) #=> nil
+        #
         # @param validators [Array<#call, Symbol>]
         #   array of validation functions.
         def initialize(validators: [])
