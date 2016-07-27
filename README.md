@@ -3,6 +3,9 @@
 [![Build Status](https://travis-ci.org/smaximov/schemaful.svg?branch=master)](https://travis-ci.org/smaximov/schemaful)
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](http://opensource.org/licenses/MIT)
 [![Inline docs](http://inch-ci.org/github/smaximov/schemaful.svg?branch=master)](http://inch-ci.org/github/smaximov/schemaful)
+[![Code Climate](https://codeclimate.com/github/smaximov/schemaful/badges/gpa.svg)](https://codeclimate.com/github/smaximov/schemaful)
+[![Test Coverage](https://codeclimate.com/github/smaximov/schemaful/badges/coverage.svg)](https://codeclimate.com/github/smaximov/schemaful/coverage)
+[![Dependency Status](https://gemnasium.com/badges/github.com/smaximov/schemaful.svg)](https://gemnasium.com/github.com/smaximov/schemaful)
 
 TODO: Delete this and the text above, and describe your gem
 
