@@ -6,7 +6,7 @@ module Schemaful
     module ClassToProc
       # @!method to_proc
       #   Convert a class to a proc which checks whether its argument
-      #   is an instance of the class (with regart to inheritance).
+      #   is an instance of the class (with regard to inheritance).
       #
       #   @example
       #     module Truthy
