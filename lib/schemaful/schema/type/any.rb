@@ -36,6 +36,12 @@ module Schemaful
           end
         end
 
+        # Make sure {.type} is inherited.
+        # @!visibility private
+        def self.inherited(subclass)
+          subclass.type(type)
+        end
+
         type Object
 
         # A new instance of Any.

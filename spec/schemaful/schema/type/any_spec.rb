@@ -70,6 +70,10 @@ module Schemaful
           end
           subject { klass.new }
 
+          it 'inherits .type' do
+            expect(klass.type).to be(Object)
+          end
+
           context '#on_validate' do
             context 'valid value' do
               it { expect { subject.validate(42) }.not_to raise_error }
