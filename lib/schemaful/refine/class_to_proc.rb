@@ -5,9 +5,9 @@ module Schemaful
     # Add `#to_proc` to Class.
     module ClassToProc
       # @!method to_proc
-      #   Convert a class to a proc which tests whether
-      #   its argument is an instance of the class (with
-      #   regard to inheritance).
+      #   Convert a class to a proc. This proc takes an argument
+      #   and checks whether the class is the argument's class or
+      #   its class's subclass.
       #
       #   @example
       #     module Truthy
