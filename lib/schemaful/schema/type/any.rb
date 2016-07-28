@@ -50,22 +50,22 @@ module Schemaful
         # using the keyword parameter `validator:` or {#validator}.
         #
         # @example Basic usage
-        #   any = Any.new
+        #   any = Schemaful::Schema::Type::Any.new
         #   any.validate('any value, literally!') #=> nil
         #
         # @example Specify a validator using the keyword argument
-        #   any = Any.new(validator: ->(v) { v.is_a?(Integer) })
+        #   any = Schemaful::Schema::Type::Any.new(validator: Integer)
         #   any.validate(2) #=> nil
         #   any.validate('invalid') #=> raise Schemaful::ValidationError
         #
         # @example Specify a validator using {#validator}
-        #   any = Any.new
+        #   any = Schemaful::Schema::Type::Any.new
         #
         #   # Any accepts any value by default:
         #   any.validate('string') #=> nil
         #
         #   # check if a value is Integer:
-        #   any.validator(->(v) { v.is_a?(Integer) })
+        #   any.validator(Integer)
         #   any.validate('string') #=> raise Schemaful::ValidationError
         #   any.validate(1) #=> nil
         #
