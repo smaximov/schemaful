@@ -8,13 +8,14 @@ rvm:
   - 2.3.0
   - ruby-head
   - rbx
-  - jruby-9.0
+  - jruby-head
 env:
   - JRUBY_OPTS="--debug"
 matrix:
   allow_failures:
     - rvm: ruby-head
     - rvm: rbx
+    - rvm: jruby-head
 before_install: gem update --remote bundler
 install:
   - bundle install --retry=3
