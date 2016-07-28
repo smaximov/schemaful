@@ -17,6 +17,8 @@ module Schemaful
       # Subclasses should implement {#on_validate} hook to provide custom
       # validation according to their type.
       class Any < Base
+        using Refine::ClassToProc
+
         # @return [Array<#to_proc>] array of validation functions.
         attr_reader :validators
 

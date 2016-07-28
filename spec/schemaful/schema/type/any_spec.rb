@@ -27,7 +27,7 @@ module Schemaful
           end
 
           context 'array of validators' do
-            let(:validator) { [->(v) { v.is_a?(Integer) }, :even?] }
+            let(:validator) { [Integer, :even?] }
 
             it { is_expected.to have(2).validators }
           end
@@ -46,7 +46,7 @@ module Schemaful
           end
 
           context 'with a validator' do
-            let(:validator) { ->(v) { v.is_a?(String) } }
+            let(:validator) { String }
 
             context 'valid value' do
               it { expect { subject.validate('42') }.not_to raise_error }
