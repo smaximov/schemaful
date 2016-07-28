@@ -5,9 +5,8 @@ module Schemaful
     # Add `#to_proc` to Class.
     module ClassToProc
       # @!method to_proc
-      #   Convert a class to a proc. This proc takes an argument
-      #   and checks whether the class is the argument's class or
-      #   its class's subclass.
+      #   Convert a class to a proc which checks whether its argument
+      #   is an instance of the class (with regart to inheritance).
       #
       #   @example
       #     module Truthy
@@ -24,13 +23,13 @@ module Schemaful
       #     module Subclass
       #       using Schemaful::Refine::ClassToProc
       #       MyString = Class.new(String)
-      #       MyString.to_proc.call('42')
+      #       String.to_proc.call(MyString.new('42'))
       #     end #=> true
       #
       #   @return [Proc]
       refine Class do
         def to_proc
-          ->(v) { ancestors.include?(v.class) }
+          ->(v) { v.is_a?(self) }
         end
       end
     end
