@@ -20,13 +20,13 @@ module Schemaful
             it { is_expected.to have(0).validators }
           end
 
-          context 'single validator' do
+          context 'wit a single validator' do
             let(:validator) { :even? }
 
             it { is_expected.to have(1).validators }
           end
 
-          context 'array of validators' do
+          context 'with an array of validators' do
             let(:validator) { [Integer, :even?] }
 
             it { is_expected.to have(2).validators }
