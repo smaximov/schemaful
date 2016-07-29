@@ -7,12 +7,12 @@ module Schemaful
     module Type
       describe Any do
         describe '.type' do
-          subject { Any.type }
+          subject { described_class.type }
           it { is_expected.to be(Object) }
         end
 
         describe '#initialize' do
-          subject { Any.new(validator: validator) }
+          subject { described_class.new(validator: validator) }
 
           context 'without validators' do
             let(:validator) { nil }
@@ -34,7 +34,7 @@ module Schemaful
         end
 
         describe '#validate' do
-          subject { Any.new(validator: validator) }
+          subject { described_class.new(validator: validator) }
 
           context 'any value' do
             let(:validator) { nil }
@@ -61,7 +61,7 @@ module Schemaful
         end
 
         context'subclass' do
-          subject { Class.new(Any, &body).new }
+          subject { Class.new(described_class, &body).new }
           let(:body) { proc {} }
 
           describe '.type' do
