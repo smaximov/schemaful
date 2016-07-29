@@ -33,6 +33,7 @@ module Schemaful
         #
         # - `Range` - the value should lie in that range.
         # @param validator [#call, Class, Symbol, Range]
+        # @return [self]
         def validator(validator)
           callable = ->(v) { validator.include?(v) } if validator.is_a?(Range)
           super(callable)

@@ -88,12 +88,14 @@ module Schemaful
         #    (with regard to inheritance).
         # - `Symbol` - converted to proc.
         # @param validator [#call, Class, Symbol]
+        # @return [self]
         def validator(validator)
           validators << case validator
                         when Symbol then validator.to_proc
                         when Class then ->(v) { v.is_a?(validator) }
                         else validator
                         end
+          self
         end
 
         # Check if a value is valid.
