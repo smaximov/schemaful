@@ -106,11 +106,13 @@ module Schemaful
         # Check if a value is valid.
         #
         # This is a hook which is meant to be overriden by subclasses.
+        # Default implementation checks if a value is an instance of
+        # {.type} (with regard to inheritance).
         #
         # @param value [Object] a value to validate.
         # @return [Boolean]
-        def on_validate(value)  # rubocop:disable Lint/UnusedMethodArgument
-          true
+        def on_validate(value)
+          value.is_a?(self.class.type)
         end
       end
     end
