@@ -4,6 +4,7 @@ require 'schemaful/error'
 
 require 'schemaful/refine'
 require 'schemaful/refine/class_to_proc'
+require 'schemaful/refine/range_to_proc'
 
 require 'schemaful/schema'
 require 'schemaful/schema/base'
