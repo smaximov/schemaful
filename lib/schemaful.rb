@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'schemaful/core_ext/boolean'
+
 require 'schemaful/error'
 
 require 'schemaful/schema'
