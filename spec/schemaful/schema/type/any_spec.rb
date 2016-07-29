@@ -60,44 +60,63 @@ module Schemaful
           end
         end
 
-        describe 'subclass' do
-          let(:klass) do
-            Class.new(Any) do
-              def on_validate(value)
-                value.is_a?(Integer)
-              end
+        context'subclass' do
+          subject { Class.new(Any, &body).new }
+          let(:body) { proc {} }
+
+          describe '.type' do
+            it 'is inherited' do
+              expect(subject.class.type).to be(Object)
             end
           end
-          subject { klass.new }
 
-          it 'inherits .type' do
-            expect(klass.type).to be(Object)
-          end
-
-          context '#on_validate' do
-            context 'valid value' do
-              it { expect { subject.validate(42) }.not_to raise_error }
+          context 'with custom .type' do
+            let(:body) do
+              proc { type String }
             end
 
-            context 'invalid value' do
-              it do
-                expect { subject.validate(42.0) }
-                  .to raise_error(ValidationError)
+            describe '#on_validate' do
+              it 'checks .type' do
+                expect(subject.on_validate('42')).to be true
+                expect(subject.on_validate(42)).to be false
               end
             end
           end
 
-          context '#on_validate with a validator' do
-            before { subject.validator(:even?) }
-
-            context 'valid value' do
-              it { expect { subject.validate(42) }.not_to raise_error }
+          context 'with custom #on_validate' do
+            let(:body) do
+              proc do
+                def on_validate(value)
+                  value.is_a?(Integer)
+                end
+              end
             end
 
-            context 'invalid value' do
-              it do
-                expect { subject.validate(1) }
-                  .to raise_error(ValidationError)
+            describe '#validate' do
+              context 'valid value' do
+                it { expect { subject.validate(42) }.not_to raise_error }
+              end
+
+              context 'invalid value' do
+                it do
+                  expect { subject.validate(42.0) }
+                    .to raise_error(ValidationError)
+                end
+              end
+
+              context 'with a validator' do
+                before { subject.validator(:even?) }
+
+                context 'valid value' do
+                  it { expect { subject.validate(42) }.not_to raise_error }
+                end
+
+                context 'invalid value' do
+                  it do
+                    expect { subject.validate(1) }
+                      .to raise_error(ValidationError)
+                  end
+                end
               end
             end
           end
