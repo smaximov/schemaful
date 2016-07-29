@@ -20,7 +20,7 @@ module Schemaful
             it { is_expected.to have(0).validators }
           end
 
-          context 'wit a single validator' do
+          context 'with a single validator' do
             let(:validator) { :even? }
 
             it { is_expected.to have(1).validators }
