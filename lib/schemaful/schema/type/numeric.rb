@@ -4,26 +4,15 @@ module Schemaful
   module Schema
     module Type
       # Numeric validation type.
+      #
+      # @example Range validator
+      #   numeric = Schemaful::Schema::Type::Numeric.new
+      #   numeric.validate(42) #=> nil
+      #   numeric.validate(-42) #=> nil
+      #   numeric.validator(0..Float::INFINITY)
+      #   numeric.validate(-42) #=> raise Schemaful::ValidationError
       class Numeric < Any
         type ::Numeric
-
-        # A new instance of {Numeric}.
-        #
-        # @see Any#initialize
-        #
-        # @example Range validator
-        #   numeric = Schemaful::Schema::Type::Numeric.new
-        #   numeric.validate(42) #=> nil
-        #   numeric.validate(-42) #=> nil
-        #   numeric.validator(0..Float::INFINITY)
-        #   numeric.validate(-42) #=> raise Schemaful::ValidationError
-        #
-        # @param validator [Object, Array<Object>]
-        #   additional validators. See {#validator} to the list of
-        #   acceptable validator types.
-        def initialize(validator: nil)
-          super
-        end
 
         # Convert a validator to a callable and add it to
         # the list of validators.
