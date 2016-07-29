@@ -4,12 +4,8 @@ module Schemaful
   module Schema
     module Type
       # This is a base class for all `Type`s. A `Type` class has an associated
-      # Ruby type and is responsible for:
-      #
-      # - (*optional*) parsing a string representation of a value of
-      #   the associated type;
-      # - validating that value;
-      # - (*optional*) converting a value of the associated type to String.
+      # Ruby type and is responsible for validation of values accorging to that
+      # type.
       #
       # This class represents the "wildcard" type and accepts every value as
       # valid.
@@ -17,11 +13,6 @@ module Schemaful
       # Subclasses should implement {#on_validate} hook to provide custom
       # validation according to their type.
       class Any < Base
-        using Refine::ClassToProc
-
-        # @return [Array<#to_proc>] array of validation functions.
-        attr_reader :validators
-
         # @overload type
         #   @return [Class] the type associated with the class.
         # @overload type(value)
@@ -74,18 +65,27 @@ module Schemaful
         #   any.validate(1) #=> raise Schemaful::ValidationError
         #   any.validate(2) #=> nil
         #
-        # @param validator [#to_proc, Array<#to_proc>]
-        #   either a validation function or an array of validation functions.
+        # @param validator [Object, Array<Object>]
+        #   additional validator .
         def initialize(validator: [])
           super()
-          @validators = Array(validator)
+          Array(validator).each { |v| validator(v) }
         end
 
-        # Add a validation function.
-        #
-        # @param validator [#to_proc]
+        # @return [Array<#call>] an array of validator functions.
+        def validators
+          @validators ||= []
+        end
+
+        # Convert a validator to a callable and add it to
+        # the list of validators.
+        # @param validator [#call, Class, Symbol]
         def validator(validator)
-          @validators << validator
+          validators << case validator
+                        when Symbol then validator.to_proc
+                        when Class then ->(v) { v.is_a?(validator) }
+                        else validator
+                        end
         end
 
         # Check if a value is valid.
