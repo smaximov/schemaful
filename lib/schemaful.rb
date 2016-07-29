@@ -10,6 +10,7 @@ require 'schemaful/schema/type'
 require 'schemaful/schema/type/any'
 require 'schemaful/schema/type/boolean'
 require 'schemaful/schema/type/numeric'
+require 'schemaful/schema/type/string'
 
 require 'schemaful/version'
 

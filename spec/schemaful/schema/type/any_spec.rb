@@ -46,7 +46,7 @@ module Schemaful
           end
 
           context 'with a validator' do
-            let(:validator) { String }
+            let(:validator) { ::String }
 
             context 'valid value' do
               it { expect { subject.validate('42') }.not_to raise_error }
@@ -72,7 +72,7 @@ module Schemaful
 
           context 'with custom .type' do
             let(:body) do
-              proc { type String }
+              proc { type ::String }
             end
 
             describe '#on_validate' do
