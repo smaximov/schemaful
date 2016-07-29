@@ -12,6 +12,31 @@ module Schemaful
       #
       # Subclasses should implement {#on_validate} hook to provide custom
       # validation according to their type.
+      #
+      # @example Basic usage
+      #   any = Schemaful::Schema::Type::Any.new
+      #   any.validate('any value, literally!') #=> nil
+      #
+      # @example Specify a validator using the keyword argument
+      #   any = Schemaful::Schema::Type::Any.new(validator: Integer)
+      #   any.validate(2) #=> nil
+      #   any.validate('invalid') #=> raise Schemaful::ValidationError
+      #
+      # @example Specify a validator using {#validator}
+      #   any = Schemaful::Schema::Type::Any.new
+      #
+      #   # Any accepts any value by default:
+      #   any.validate('string') #=> nil
+      #
+      #   # check if a value is Integer:
+      #   any.validator(Integer)
+      #   any.validate('string') #=> raise Schemaful::ValidationError
+      #   any.validate(1) #=> nil
+      #
+      #   # check if a value is even:
+      #   any.validator(:even?)
+      #   any.validate(1) #=> raise Schemaful::ValidationError
+      #   any.validate(2) #=> nil
       class Any < Base
         # @overload type
         #   @return [Class] the type associated with the class.
@@ -39,31 +64,6 @@ module Schemaful
         #
         # To restrict accepted values, you should provide additional validators
         # using the keyword parameter `validator:` or {#validator}.
-        #
-        # @example Basic usage
-        #   any = Schemaful::Schema::Type::Any.new
-        #   any.validate('any value, literally!') #=> nil
-        #
-        # @example Specify a validator using the keyword argument
-        #   any = Schemaful::Schema::Type::Any.new(validator: Integer)
-        #   any.validate(2) #=> nil
-        #   any.validate('invalid') #=> raise Schemaful::ValidationError
-        #
-        # @example Specify a validator using {#validator}
-        #   any = Schemaful::Schema::Type::Any.new
-        #
-        #   # Any accepts any value by default:
-        #   any.validate('string') #=> nil
-        #
-        #   # check if a value is Integer:
-        #   any.validator(Integer)
-        #   any.validate('string') #=> raise Schemaful::ValidationError
-        #   any.validate(1) #=> nil
-        #
-        #   # check if a value is even:
-        #   any.validator(:even?)
-        #   any.validate(1) #=> raise Schemaful::ValidationError
-        #   any.validate(2) #=> nil
         #
         # @param validator [Object, Array<Object>]
         #   additional validators. See {#validator} for the list of
