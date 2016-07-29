@@ -66,7 +66,8 @@ module Schemaful
         #   any.validate(2) #=> nil
         #
         # @param validator [Object, Array<Object>]
-        #   additional validators.
+        #   additional validators. See {#validator} for the list of
+        #   acceptable validator types.
         def initialize(validator: nil)
           super()
           Array(validator).each { |v| validator(v) }
@@ -79,6 +80,13 @@ module Schemaful
 
         # Convert a validator to a callable and add it to
         # the list of validators.
+        #
+        # Acceptable validator types are:
+        #
+        # - `#call` - any callable which return true or false.
+        # - `Class` - the value should be an instance of that class
+        #    (with regard to inheritance).
+        # - `Symbol` - converted to proc.
         # @param validator [#call, Class, Symbol]
         def validator(validator)
           validators << case validator
