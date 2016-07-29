@@ -66,8 +66,8 @@ module Schemaful
         #   any.validate(2) #=> nil
         #
         # @param validator [Object, Array<Object>]
-        #   additional validator .
-        def initialize(validator: [])
+        #   additional validators.
+        def initialize(validator: nil)
           super()
           Array(validator).each { |v| validator(v) }
         end

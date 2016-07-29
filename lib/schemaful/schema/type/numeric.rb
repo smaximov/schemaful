@@ -20,7 +20,7 @@ module Schemaful
         #
         # @param validator [Object, Array<Object>]
         #   additional validators.
-        def initialize(validator: [])
+        def initialize(validator: nil)
           super
         end
 

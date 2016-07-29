@@ -15,7 +15,7 @@ module Schemaful
           subject { Any.new(validator: validator) }
 
           context 'without validators' do
-            let(:validator) { [] }
+            let(:validator) { nil }
 
             it { is_expected.to have(0).validators }
           end
@@ -37,7 +37,7 @@ module Schemaful
           subject { Any.new(validator: validator) }
 
           context 'any value' do
-            let(:validator) { [] }
+            let(:validator) { nil }
 
             it 'should be valid' do
               expect { subject.validate('42') }.not_to raise_error
