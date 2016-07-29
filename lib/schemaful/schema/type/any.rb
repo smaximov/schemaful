@@ -1,5 +1,7 @@
+# coding: utf-8
 # frozen_string_literal: true
 
+# rubocop:disable Style/AsciiComments
 module Schemaful
   module Schema
     module Type
@@ -37,6 +39,19 @@ module Schemaful
       #   any.validator(:even?)
       #   any.validate(1) #=> raise Schemaful::ValidationError
       #   any.validate(2) #=> nil
+      #
+      # @example Defining a subclass
+      #   class StringType < Schemaful::Schema::Type::Any
+      #     type String
+      #   end
+      #
+      #   StringType.type #=> String
+      #   str = StringType.new
+      #   str.validate(42) #=> raise Schemaful::ValidationError
+      #   str.validate('42') #=> nil
+      #   # restrict strings to ASCII charset
+      #   str.validator(:ascii_only?)
+      #   str.validate('строка') #=> raise Schemaful::ValidationError
       class Any < Base
         # @overload type
         #   @return [Class] the type associated with the class.
@@ -129,3 +144,4 @@ module Schemaful
     end
   end
 end
+# rubocop:enable Style/AsciiComments
