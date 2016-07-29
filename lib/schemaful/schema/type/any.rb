@@ -70,6 +70,7 @@ module Schemaful
         #   acceptable validator types.
         def initialize(validator: nil)
           super()
+          validator ||= []      # rbx fix
           Array(validator).each { |v| validator(v) }
         end
 
