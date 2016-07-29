@@ -11,4 +11,7 @@ RuboCop::RakeTask.new
 YARD::Rake::YardocTask.new(:yard)
 YARD::Doctest::RakeTask.new
 
-task default: :spec
+desc 'Run all tests'
+task test: %i(spec yard:doctest)
+
+task default: :test
