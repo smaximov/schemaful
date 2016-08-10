@@ -5,7 +5,7 @@ module Schemaful
     # Base class for all schema classes.
     #
     # @abstract Subclass and override {#validate} to implement
-    #   a custom Base class.
+    #   a custom schema class.
     class Base
       # Check if a value is valid.
       # @param value [Object] the value to validate.
